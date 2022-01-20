@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ public class TestGuru99 {
 	
 	////div[@id='dismiss-button']
 	public static WebElement dob;
+	public static WebElement email_id;
 	public static WebDriver driver;
 	public static void main(String[] args) throws InterruptedException {
 	 System.setProperty("webdriver.chrome.driver", "./Drivers/chromedriver.exe");
@@ -45,12 +47,19 @@ public class TestGuru99 {
         Thread.sleep(6000);
         dob=driver.findElement(By.xpath("//input[@id='dob']"));
 		Date_Of_Birth(dd, MM, yy);
-		
+		email_id=driver.findElement(By.xpath("//input[@name='emailid']"));
+		String email=mail_ID()+"@gmail.com";
+		System.out.println(email);
+		email_id.sendKeys(email);
 		}
 public static void	Date_Of_Birth(String dd,String MM,String yy) {
 	dob.sendKeys(dd);
 	dob.sendKeys(MM);
 	dob.sendKeys(yy);
+}
+public static  String mail_ID() {
+	String generatestring=RandomStringUtils.randomAlphabetic(8);
+	return generatestring;
 }
 
 }
